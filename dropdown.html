@@ -1,4 +1,4 @@
-<ul ng-class="{nav: true, 'navbar-nav': true, 'navbar-right': $ctrl.alignRight}">
+<ul ng-class="{nav: true, 'navbar-nav': true, 'navbar-right': $ctrl.alignRight}" ng-style="{width: $ctrl.width}">
 	<li ng-class="{dropdown: true, open:$ctrl.open}">
 	  <a href="#" ng-click="$ctrl.open = !$ctrl.open"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$ctrl.title}} <span class="caret"></span></a>
 	  <ul class="dropdown-menu">

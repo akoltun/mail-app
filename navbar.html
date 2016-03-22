@@ -1,10 +1,9 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <main-menu></main-menu>
-      <search></search>
-      <profile-menu></profile-menu>
+      <dropdown items="['Mail', 'Contacts']" title="$ctrl.application" update-title="true" width="'120px'"></dropdown>
+      <search width="'500px'"></search>
+      <dropdown items="['Profile', 'Sign Out']" title="'Alexander'" update-title="false" align-right="true"></dropdown>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
