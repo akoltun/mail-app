@@ -1,0 +1,78 @@
+<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4" >
+  <div class="panel panel-info" ng-if="!$ctrl.edit">
+    <div class="panel-heading">
+      <h3 class="panel-title" ng-if="!$ctrl.nameEdit" ng-click="$ctrl.nameEdit=true">{{$ctrl.card.fullName}}</h3>
+      <form class="form" ng-if="$ctrl.nameEdit">
+        <!-- <div class="form-group"> -->
+          <input type="text" class="form-control" placeholder="Name" ng-model="$ctrl.card.fullName">
+        <!-- </div> -->
+      </form>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-3" style="text-align: center;">
+          <img class="img-circle" ng-src="{{$ctrl.card.avatarUrl}}" />
+          <br><br>
+          <div class="btn-group-vertical" role="group" aria-label="...">
+            <button type="button" class="btn btn-warning" ng-click="$ctrl.startEdit()">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+        <div class="col-xs-9">
+          <table class="table table-user-information">
+            <tbody>
+              <tr><td>Birthday</td><td>{{$ctrl.card.birthdate | date:'longDate'}}</td></tr>
+              <tr><td>Gender</td><td>{{$ctrl.card.gender}}</td></tr>
+              <tr><td>Address</td><td>{{$ctrl.card.address}}</td></tr>
+              <tr><td>Email</td><td><a href="mailto:{{$ctrl.card.email}}">{{$ctrl.card.email}}</a></td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info" ng-if="$ctrl.edit">
+    <div class="panel-body">
+      <form class="form-horizontal" name="userCard">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="name" placeholder="Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="birthday" class="col-sm-2 control-label">Birthday</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" name="birthday" placeholder="Birthday">
+          </div>
+          <div class="col-sm-6">
+            <label class="radio-inline">
+              <input type="radio" name="gender" value="Male"> Male
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="gender" value="Female"> Female
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address" class="col-sm-2 control-label">Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="address" placeholder="Address">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="avatar" class="col-sm-2 control-label">Avatar</label>
+          <div class="col-sm-10">
+            <input type="url" class="form-control" name="avatar" placeholder="Avatar">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
