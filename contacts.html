@@ -1,0 +1,6 @@
+<div class="container-fluid">
+  <div class="row">
+  	<contact contact="$ctrl.newContact" add="$ctrl.add(newContact)"></contact>
+	<contact contact="contact" ng-repeat="contact in $ctrl.contacts" remove="$ctrl.remove(contactId)"></contact>
+  </div>
+</div>
