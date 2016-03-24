@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="table-responsive" ng-if="$ctrl.messages && $ctrl.messages.count > 0">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td>
+              <a ng-click="$ctrl.sortBy('from')">From</a>
+              <span class="glyphicon glyphicon-sort-by-attributes{{$ctrl.reverse ? '-alt' : ''}}" aria-hidden="true" ng-if="$ctrl.orderColumn == 'from'"></span>
+            </td>
+            <td>
+              <a ng-click="$ctrl.sortBy('subject')">Subject</a>
+              <span class="glyphicon glyphicon-sort-by-attributes{{$ctrl.reverse ? '-alt' : ''}}" aria-hidden="true" ng-if="$ctrl.orderColumn == 'subject'"></span>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="{{$ctrl.message == message ? 'active' : ''}}" ng-repeat="message in $ctrl.messages.items | orderBy:$ctrl.orderColumn:$ctrl.reverse" ng-click="$ctrl.selectMessage(message)">
+            <td>{{message.from}}</td>
+            <td>{{message.subject}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-default" ng-if="$ctrl.messages == 'loading'">
+      <div class="panel-body">
+        Loading...
+      </div>
+    </div>
+  </div>
+</div>

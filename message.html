@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-primary" ng-if="$ctrl.message">
+      <div class="panel-heading">{{$ctrl.message.subject}}</div>
+      <table class="table">
+        <tr><th>From:</th><td>{{$ctrl.message.from}}</td></tr>
+        <tr><th>To:</th><td>{{$ctrl.message.to}}</td></tr>
+      </table>
+      <div class="panel-body">
+        <p>{{$ctrl.message.body}}</p>
+      </div>
+    </div>
+  </div>
+</div>`
