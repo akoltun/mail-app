@@ -1,14 +1,22 @@
-<div class="row">
+<div class="row" ng-if="$ctrl.message">
   <div class="col-xs-12">
-    <div class="panel panel-primary" ng-if="$ctrl.message">
-      <div class="panel-heading">{{$ctrl.message.subject}}</div>
+    <a ui-sref="mail.folder({ folder: $ctrl.folder.url })" class="btn btn-default" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back</a>
+    <br><br>
+    <div class="panel panel-primary" ng-if="$ctrl.message != 'loading'">
+      <div class="panel-heading">Message from {{$ctrl.message.date | date:'medium'}}</div>
       <table class="table">
-        <tr><th>From:</th><td>{{$ctrl.message.from}}</td></tr>
-        <tr><th>To:</th><td>{{$ctrl.message.to}}</td></tr>
+        <tr ng-if="$ctrl.folder.from"><th>From:</th><td>{{$ctrl.message.from}}</td></tr>
+        <tr ng-if="$ctrl.folder.to"><th>To:</th><td>{{$ctrl.message.to}}</td></tr>
+        <tr><th>Subject:</th><td>{{$ctrl.message.subject}}</td></tr>
       </table>
       <div class="panel-body">
         <p>{{$ctrl.message.body}}</p>
       </div>
     </div>
+    <div class="panel panel-default" ng-if="$ctrl.message == 'loading'">
+      <div class="panel-body">
+        Loading...
+      </div>
+    </div>
   </div>
-</div>`
+</div>

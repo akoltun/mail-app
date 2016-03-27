@@ -22,23 +22,52 @@ def generate_users(count)
 end
 
 def generate_mails(start, count, from, to)
+	date = DateTime.now
 	mails = {}
 	count.times() do |i|
+		date = date - rand(100)
 		mail = {
-			id: start + i,
+			id: Faker::Bitcoin.address,
+			# id: start + i,
+			date: date.strftime("%Y-%m-%d"),
 			from: from || Faker::Internet.email,
 			to: to || Faker::Internet.email,
 			subject: Faker::Lorem.sentence,
 			body: Faker::Lorem.paragraph(rand(5))
 		}
-		mails["a#{i}".to_sym] = mail
+		mails[mail[:id]] = mail
 	end
 	return { items: mails, count: count }
 end
 
 h = { 
 	:contacts => generate_users(50),
-	'folder-names' => [ "Inbox", "Sent", "Draft", "Spam", "Trash" ],
+	'folder-list' => [{
+			name: 'Inbox',
+			url: 'inbox',
+			from: true,
+			to: false
+		}, {
+			name: 'Sent',
+			url: 'sent',
+			from: false,
+			to: true
+		}, {
+			name: 'Draft',
+			url: 'draft',
+			from: false,
+			to: true
+		}, {
+			name: 'Spam',
+			url: 'spam',
+			from: true,
+			to: false			
+		}, {
+			name: 'Trash',
+			url: 'trash',
+			from: true,
+			to: true
+		}],
 	:folders => {
 		inbox: generate_mails(0, 5, nil, 'alexander@mail.ru'),
 		sent: generate_mails(5, 4, 'alexander@mail.ru', nil),

@@ -1,22 +1,33 @@
-<div class="row">
+<ui-view></ui-view>
+<div class="row" ng-if="!$ctrl.message">
   <div class="col-xs-12">
     <div class="table-responsive" ng-if="$ctrl.messages && $ctrl.messages.count > 0">
       <table class="table table-hover">
         <thead>
           <tr>
-            <td>
+            <th>
+              <a ng-click="$ctrl.sortBy('date')">Date</a>
+              <span class="glyphicon glyphicon-sort-by-attributes{{$ctrl.reverse ? '-alt' : ''}}" aria-hidden="true" ng-if="$ctrl.orderColumn == 'date'"></span>
+            </th>
+            <th ng-if="$ctrl.folder.from">
               <a ng-click="$ctrl.sortBy('from')">From</a>
               <span class="glyphicon glyphicon-sort-by-attributes{{$ctrl.reverse ? '-alt' : ''}}" aria-hidden="true" ng-if="$ctrl.orderColumn == 'from'"></span>
-            </td>
-            <td>
+            </th>
+            <th ng-if="$ctrl.folder.to">
+              <a ng-click="$ctrl.sortBy('to')">To</a>
+              <span class="glyphicon glyphicon-sort-by-attributes{{$ctrl.reverse ? '-alt' : ''}}" aria-hidden="true" ng-if="$ctrl.orderColumn == 'to'"></span>
+            </th>
+            <th>
               <a ng-click="$ctrl.sortBy('subject')">Subject</a>
               <span class="glyphicon glyphicon-sort-by-attributes{{$ctrl.reverse ? '-alt' : ''}}" aria-hidden="true" ng-if="$ctrl.orderColumn == 'subject'"></span>
-            </td>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr class="{{$ctrl.message == message ? 'active' : ''}}" ng-repeat="message in $ctrl.messages.items | orderBy:$ctrl.orderColumn:$ctrl.reverse" ng-click="$ctrl.selectMessage(message)">
-            <td>{{message.from}}</td>
+          <tr ng-repeat="message in $ctrl.messages.items | orderBy:$ctrl.orderColumn:$ctrl.reverse" ng-click="$ctrl.selectMessage(message)">
+            <td>{{message.date | date:'short'}}</td>
+            <td ng-if="$ctrl.folder.from">{{message.from}}</td>
+            <td ng-if="$ctrl.folder.to">{{message.to}}</td>
             <td>{{message.subject}}</td>
           </tr>
         </tbody>

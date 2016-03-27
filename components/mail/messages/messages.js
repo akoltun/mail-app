@@ -1,10 +1,10 @@
 angular.module("mailApp").component('messages', {
   bindings: {
-    messages: "<",
-    message: '='
+    folder: "<",
+    messages: "<"
   },
-  controller: function() {
-    this.orderColumn = 'from';
+  controller: function($state) {
+    this.orderColumn = 'date';
     this.sortBy = function(orderColumn) {
       if (this.orderColumn == orderColumn) {
         this.reverse = !this.reverse;
@@ -15,7 +15,7 @@ angular.module("mailApp").component('messages', {
       }
     };
     this.selectMessage = function(message) {
-      this.message = message;
+      $state.go('mail.message', { folder: this.folder.url, message: message.id });
     };
   },
   templateUrl: "components/mail/messages/messages.html"

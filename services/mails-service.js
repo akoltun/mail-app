@@ -1,18 +1,43 @@
 angular.module('mailApp').service('MailsService', function($http, firebase) {
+  var folders;
+
   this.getFolders = function() {
-    return $http.get(firebase.getBaseUrl() + 'folder-names.json')
-    .then(response => firebase.normalizeToArray(response.data))
+    if (!folders) {
+      folders = $http.get(firebase.getBaseUrl() + 'folder-list.json')
+        .then(response => response.data)
+        .catch((error) => {
+          folders = null;
+          console.error(error);
+        });
+    }
+    return folders
+  };
+
+  this.getFolderByUrl = function(url) {
+    return this.getFolders().then(response => {
+      for (var i = 0; i < response.length; i++) {
+        if (response[i].url == url) {
+          return response[i];
+        }
+      }
+      return null;
+    });
+  };
+
+  this.getMessages = function(folder) {
+    return $http.get(firebase.getBaseUrl() + 'folders/' + folder.url + '.json')
+    .then(response => {
+      response.data.items = firebase.normalizeToArray(response.data.items);
+      return response.data;
+    })
     .catch((error) => {
       console.error(error);
     });
   };
 
-  this.getMessages = function(folder) {
-    return $http.get(firebase.getBaseUrl() + 'folders/' + folder + '.json')
-    .then(response => {
-      response.data.items = firebase.normalizeToArray(response.data.items);
-      return response.data;
-    })
+  this.getMessage = function(folder, id) {
+    return $http.get(firebase.getBaseUrl() + 'folders/' + folder.url + '/items/' + id + '.json')
+    .then(response => response.data)
     .catch((error) => {
       console.error(error);
     });

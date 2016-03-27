@@ -1,17 +1,9 @@
 angular.module('mailApp').component('folders', {
-  bindings: {
-    folderChanged: "&"
-  },
   templateUrl: "components/mail/folders/folders.html",
-  controller: function(MailsService) {
+  controller: function(MailsService, $state) {
     MailsService.getFolders().then(response => { 
       this.folders = response;
-      this.selectFolder('Inbox');
-    } );
-    
-    this.selectFolder = function(folder) {
-      this.folder = folder
-      this.folderChanged({folder: folder});
-    };
+      // $state.go('mail.folder', { folder: this.folders[0].url });
+    });
   }
 });
