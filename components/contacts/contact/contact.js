@@ -4,7 +4,7 @@ angular.module("mailApp").component('contact', {
     remove: "&",
     add: "&"
   },
-  templateUrl: "components/contact/contact.html",
+  templateUrl: "components/contacts/contact/contact.html",
   controller: function(ContactsService) {
   	this.startEdit = () => {
   		this.edit = true;

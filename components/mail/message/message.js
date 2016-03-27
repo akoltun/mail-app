@@ -2,5 +2,5 @@ angular.module("mailApp").component('message', {
   bindings: {
     message: "<"
   },
-  templateUrl: "components/message/message.html"
+  templateUrl: "components/mail/message/message.html"
 });

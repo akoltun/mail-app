@@ -18,5 +18,5 @@ angular.module("mailApp").component('messages', {
       this.message = message;
     };
   },
-  templateUrl: "components/messages/messages.html"
+  templateUrl: "components/mail/messages/messages.html"
 });

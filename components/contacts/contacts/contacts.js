@@ -17,5 +17,5 @@ angular.module("mailApp").component('contacts', {
   		this.newContact = { id: null }
   	};
   },
-  templateUrl: "components/contacts/contacts.html"
+  templateUrl: "components/contacts/contacts/contacts.html"
 });
