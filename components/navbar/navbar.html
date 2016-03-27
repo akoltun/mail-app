@@ -1,7 +1,10 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-      <dropdown items="['Mail', 'Contacts']" title="$ctrl.application" update-title="true" width="'120px'"></dropdown>
+  	<ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a ui-sref="mail">Mail</a></li>
+        <li ui-sref-active="active"><a ui-sref="contacts">Contacts</a></li>
+    </ul>
       <search width="'400px'"></search>
       <dropdown items="['Profile', 'Sign Out']" title="'Alexander'" update-title="false" align-right="true"></dropdown>
-  </div><!-- /.container-fluid -->
+  </div>
 </nav>
