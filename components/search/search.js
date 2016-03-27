@@ -2,5 +2,5 @@ angular.module('mailApp').component('search', {
 	bindings: {
 		width: '<'
 	},
-  templateUrl: "search.html"
+  templateUrl: "components/search/search.html"
 });

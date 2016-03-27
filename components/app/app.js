@@ -1,3 +1,3 @@
 angular.module('mailApp').component('app', {
-  templateUrl: "app.html"
+  templateUrl: "components/app/app.html"
 });

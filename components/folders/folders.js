@@ -2,7 +2,7 @@ angular.module('mailApp').component('folders', {
   bindings: {
     folderChanged: "&"
   },
-  templateUrl: "folders.html",
+  templateUrl: "components/folders/folders.html",
   controller: function(MailsService) {
     MailsService.getFolders().then(response => { 
       this.folders = response;

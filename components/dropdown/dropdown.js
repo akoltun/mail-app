@@ -1,5 +1,5 @@
 angular.module('mailApp').component('dropdown', {
-  templateUrl: "dropdown.html",
+  templateUrl: "components/dropdown/dropdown.html",
   bindings: {
   	title: '=',
     items: '<',

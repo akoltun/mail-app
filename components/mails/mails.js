@@ -1,5 +1,5 @@
 angular.module('mailApp').component('mails', {
-  templateUrl: "mails.html",
+  templateUrl: "components/mails/mails.html",
   controller: function(MailsService) {
     this.folderChanged = function(folder) {
     	this.messages = 'loading';
