@@ -1,7 +1,19 @@
 <div class="row" ng-if="$ctrl.message">
   <div class="col-xs-12">
-    <a ui-sref="mail.folder({ folder: $ctrl.folder.url })" class="btn btn-default" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back</a>
-    <br><br>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a ui-sref="mail.folder({ folder: $ctrl.folder.url })" class="btn btn-default" role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back</a></li>
+          <li ng-if="$ctrl.folder.reply"><a class="btn btn-default" role="button" ng-click="$ctrl.reply()">Reply</a></li>
+          <li ng-if="$ctrl.folder.forward"><a class="btn btn-default" role="button" ng-click="$ctrl.forward()">Forward</a></li>
+          <li ng-if="$ctrl.folder.spam"><a class="btn btn-default" role="button" ng-click="$ctrl.spam()">Spam</a></li>
+          <li ng-if="$ctrl.folder.unspam"><a class="btn btn-default" role="button" ng-click="$ctrl.unspam()">Not a Spam</a></li>
+          <li ng-if="$ctrl.folder.save"><a class="btn btn-default" role="button" ng-click="$ctrl.save()">Save</a></li>
+          <li ng-if="$ctrl.folder.send"><a class="btn btn-default" role="button" ng-click="$ctrl.send()">Send</a></li>
+          <li ng-if="$ctrl.folder.delete"><a class="btn btn-default" role="button" ng-click="$ctrl.delete()">Delete</a></li>
+        </ul>
+      </div>
+    </nav>
     <div class="panel panel-primary" ng-if="$ctrl.message != 'loading'">
       <div class="panel-heading">Message from {{$ctrl.message.date | date:'medium'}}</div>
       <table class="table">

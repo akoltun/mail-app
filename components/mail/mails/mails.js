@@ -3,7 +3,7 @@ angular.module('mailApp').component('mails', {
   controller: function(MailsService) {
     this.folderChanged = function(folder) {
     	this.messages = 'loading';
-      MailsService.getMessages(folder.toLowerCase()).then(response => this.messages = response);
+      MailsService.getMessages(folder.url).then(response => this.messages = response);
     };
   }
 });

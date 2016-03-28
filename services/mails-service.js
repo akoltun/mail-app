@@ -42,4 +42,12 @@ angular.module('mailApp').service('MailsService', function($http, firebase) {
       console.error(error);
     });
   };
+
+  this.deleteMessage = function(folder, id) {
+    return $http.delete(firebase.getBaseUrl() + 'folders/' + folder.url + '/items/' + id + '.json')
+    .then(response => response.data)
+    .catch((error) => {
+      console.error(error);
+    });
+  };
 });

@@ -21,14 +21,13 @@ def generate_users(count)
   return users
 end
 
-def generate_mails(start, count, from, to)
+def generate_mails(count, from, to)
 	date = DateTime.now
 	mails = {}
 	count.times() do |i|
 		date = date - rand(100)
 		mail = {
 			id: Faker::Bitcoin.address,
-			# id: start + i,
 			date: date.strftime("%Y-%m-%d"),
 			from: from || Faker::Internet.email,
 			to: to || Faker::Internet.email,
@@ -46,34 +45,46 @@ h = {
 			name: 'Inbox',
 			url: 'inbox',
 			from: true,
-			to: false
+			to: false,
+			reply: true,
+			forward: true,
+			spam: true,
+			delete: true
 		}, {
 			name: 'Sent',
 			url: 'sent',
 			from: false,
-			to: true
+			to: true,
+			delete: true
 		}, {
 			name: 'Draft',
 			url: 'draft',
 			from: false,
-			to: true
+			to: true,
+			save: true,
+			send: true,
+			delete: true
 		}, {
 			name: 'Spam',
 			url: 'spam',
 			from: true,
-			to: false			
+			to: false,
+			unspam: true,
+			delete: true			
 		}, {
 			name: 'Trash',
 			url: 'trash',
 			from: true,
-			to: true
+			to: true,
+			delete: true,
+			deletePermanently: true
 		}],
 	:folders => {
-		inbox: generate_mails(0, 5, nil, 'alexander@mail.ru'),
-		sent: generate_mails(5, 4, 'alexander@mail.ru', nil),
-		draft: generate_mails(9, 3, 'alexander@mail.ru', nil),
-		spam: generate_mails(12, 2, nil, 'alexander@mail.ru'),
-		trash: generate_mails(14, 1, nil, 'alexander@mail.ru')
+		inbox: generate_mails(100, nil, 'alexander@mail.ru'),
+		sent: generate_mails(100, 'alexander@mail.ru', nil),
+		draft: generate_mails(100, 'alexander@mail.ru', nil),
+		spam: generate_mails(100, nil, 'alexander@mail.ru'),
+		trash: generate_mails(100, nil, 'alexander@mail.ru')
 	}
 }
 
