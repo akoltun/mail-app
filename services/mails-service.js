@@ -1,4 +1,4 @@
-angular.module('mailApp').service('MailsService', function($http, firebase) {
+angular.module('mailApp').service('MailsService', function($http, firebase, $q) {
   var folders;
 
   this.getFolders = function() {
@@ -37,14 +37,40 @@ angular.module('mailApp').service('MailsService', function($http, firebase) {
 
   this.getMessage = function(folder, id) {
     return $http.get(firebase.getBaseUrl() + 'folders/' + folder.url + '/items/' + id + '.json')
-    .then(response => response.data)
+    .then(response => firebase.normalizeObject(id, response.data))
     .catch((error) => {
       console.error(error);
     });
   };
 
-  this.deleteMessage = function(folder, id) {
-    return $http.delete(firebase.getBaseUrl() + 'folders/' + folder.url + '/items/' + id + '.json')
+
+  this.moveMessage = function(sourceFolder, targetFolder, message) {
+    console.log('move', sourceFolder, targetFolder, message);
+    return $q.all([
+        this.createMessage(targetFolder, message),
+        this.deleteMessage(sourceFolder, message)  
+      ]);
+  };
+
+  this.createMessage = function(folder, message) {
+    return $http.post(firebase.getBaseUrl() + 'folders/' + folder.url + '/items.json', message)
+    .then(response => response.data)
+    .catch((error) => {
+      console.error(error);
+    });    
+  };
+
+  this.updateMessage = function(folder, message) {
+    return $http.put(firebase.getBaseUrl() + 'folders/' + folder.url + '/items/' + message.id + '.json', message)
+    .then(response => response.data)
+    .catch((error) => {
+      console.error(error);
+    });    
+  };
+
+  this.deleteMessage = function(folder, message) {
+    console.log('delete', folder, message);
+    return $http.delete(firebase.getBaseUrl() + 'folders/' + folder.url + '/items/' + message.id + '.json')
     .then(response => response.data)
     .catch((error) => {
       console.error(error);

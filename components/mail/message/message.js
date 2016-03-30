@@ -5,6 +5,18 @@ angular.module("mailApp").component('message', {
   },
   templateUrl: "components/mail/message/message.html",
   controller: function(MailsService, $state) {
+  	var moveToFolder = (targetFolder) => {
+    	var message = this.message;
+    	var folder = this.folder;
+    	this.message = 'loading';
+    	
+  		MailsService.getFolderByUrl(targetFolder).then(response => {
+  			MailsService.moveMessage(folder, response, message).then(response => {
+		      $state.go('mail.folder', { folder: folder.url });
+  			});	
+  		});
+  	}
+
     this.reply = () => {
 
     },
@@ -12,10 +24,10 @@ angular.module("mailApp").component('message', {
 
     },
     this.spam = () => {
-
+    	moveToFolder('spam');
     },
     this.unspam = () => {
-
+    	moveToFolder('inbox');
     },
     this.save = () => {
 
@@ -24,12 +36,14 @@ angular.module("mailApp").component('message', {
 
     },
     this.delete = () => {
-    	var id = this.message.id;
-    	this.message = 'loading';
     	if (this.folder.deletePermanently) {
-    		MailsService.deleteMessage(this.folder, id).then(response => {
-		      $state.go('mail.folder', { folder: this.folder.url });
+    		var url = this.folder.url;
+    		MailsService.deleteMessage(this.folder, this.message).then(response => {
+		      $state.go('mail.folder', { folder: url });
   			});
+    	}
+    	else {
+    		moveToFolder('trash');
     	}
     }
   }

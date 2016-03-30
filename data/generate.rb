@@ -8,7 +8,6 @@ def generate_users(count)
     name = Faker::Name.name
     gender = rand(2)
   	user = {
-  		id: i,
   		gender: ["Female", "Male"][gender],
   		fullName: name,
   		email: Faker::Internet.free_email(name),
@@ -16,7 +15,7 @@ def generate_users(count)
   		address: Faker::Address.street_address,
   		avatarUrl: "https://randomuser.me/api/portraits/thumb/#{['women','men'][gender]}/#{rand(96)}.jpg"
   	}
-  	users["a#{i}".to_sym] = user
+  	users[Faker::Bitcoin.address] = user
   end
   return users
 end
@@ -27,14 +26,13 @@ def generate_mails(count, from, to)
 	count.times() do |i|
 		date = date - rand(100)
 		mail = {
-			id: Faker::Bitcoin.address,
 			date: date.strftime("%Y-%m-%d"),
 			from: from || Faker::Internet.email,
 			to: to || Faker::Internet.email,
 			subject: Faker::Lorem.sentence,
 			body: Faker::Lorem.paragraph(rand(5))
 		}
-		mails[mail[:id]] = mail
+		mails[Faker::Bitcoin.address] = mail
 	end
 	return { items: mails, count: count }
 end
